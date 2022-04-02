@@ -193,6 +193,7 @@ class SinglePosition {
         // Rejected
         // PendingNew
         if (order.clientID && order.clientID === this._name && order.status === 'New') {
+            console.log(order.clientID, order.id);
             if (this.enabledOpen) {
                 this._openID = order.id;
                 this._openTime = Date.now();
