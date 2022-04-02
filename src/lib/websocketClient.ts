@@ -63,8 +63,8 @@ export class WebsocketAPIClient {
 
     public async Start() {
         const rdb = await getRealTimeDatabase()
-        this.apiKey = await rdb.get(await rdb.getReference('settings/ftx/apiKey')) as string
-        this.apiSecret = await rdb.get(await rdb.getReference('settings/ftx/apiSecret')) as string
+        this.apiKey = await rdb.get(await rdb.getReference('settings/ascendEX/apiKey')) as string
+        this.apiSecret = await rdb.get(await rdb.getReference('settings/ascendEX/apiSecret')) as string
         
         this.wsAPI = new WebsocketAPI({
             feature: this.feature,

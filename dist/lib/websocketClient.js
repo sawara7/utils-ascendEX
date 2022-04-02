@@ -91,8 +91,8 @@ class WebsocketAPIClient {
     Start() {
         return __awaiter(this, void 0, void 0, function* () {
             const rdb = yield (0, my_utils_1.getRealTimeDatabase)();
-            this.apiKey = (yield rdb.get(yield rdb.getReference('settings/ftx/apiKey')));
-            this.apiSecret = (yield rdb.get(yield rdb.getReference('settings/ftx/apiSecret')));
+            this.apiKey = (yield rdb.get(yield rdb.getReference('settings/ascendEX/apiKey')));
+            this.apiSecret = (yield rdb.get(yield rdb.getReference('settings/ascendEX/apiSecret')));
             this.wsAPI = new __1.WebsocketAPI({
                 feature: this.feature,
                 accountGroup: 4,
