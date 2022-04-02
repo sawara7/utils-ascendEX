@@ -193,15 +193,17 @@ class SinglePosition {
         // Rejected
         // PendingNew
         if (order.clientID && order.clientID === this._name && order.status === 'New') {
-            console.log(order.clientID, order.id);
             if (this.enabledOpen) {
+                console.log('open');
                 this._openID = order.id;
                 this._openTime = Date.now();
             }
             if (this.enabledClose) {
+                console.log('close');
                 this._closeID = order.id;
                 this._closeTime = Date.now();
             }
+            console.log(order.clientID, this._openID, this._closeID);
         }
         if (order.id === this._openID && ['Filled', 'Canceled'].includes(order.status)) {
             this.resetOpen();
