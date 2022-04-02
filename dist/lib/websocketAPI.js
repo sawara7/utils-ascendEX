@@ -83,7 +83,6 @@ class WebsocketAPI {
                 }
             }
             else if (d.m === 'order') {
-                console.log(d);
                 if (this._v2) {
                     const res = d;
                     if (this.params.onOrder && res.ac === "FUTURES" && res.action === "place-order") {
@@ -124,14 +123,13 @@ class WebsocketAPI {
                 }
             }
             else if (d.m === 'futures-order') {
-                console.log(d);
                 const res = d;
                 if (this.params.onOrder && res) {
                     const order = {
                         id: res.orderId,
                         market: res.s,
                         type: res.ot,
-                        side: res.sd,
+                        side: res.sd === 'Buy' ? 'buy' : 'sell',
                         size: parseFloat(res.q),
                         price: parseFloat(res.p),
                         status: res.st,
