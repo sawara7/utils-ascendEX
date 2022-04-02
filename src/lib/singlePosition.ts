@@ -274,12 +274,12 @@ export class SinglePosition {
         // Rejected
         // PendingNew
         if (order.clientID && order.clientID === this._name && order.status === 'New') {
-            if (this.enabledOpen) {
+            if (this._openID === order.clientID) {
                 console.log('open')
                 this._openID = order.id
                 this._openTime = Date.now()
             }
-            if (this.enabledClose) {
+            if (this._closeID === order.clientID) {
                 console.log('close')
                 this._closeID = order.id
                 this._closeTime = Date.now()
