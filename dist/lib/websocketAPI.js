@@ -132,12 +132,12 @@ class WebsocketAPI {
                         market: res.s,
                         type: res.ot,
                         side: res.sd,
-                        size: res.q,
-                        price: res.p,
+                        size: parseFloat(res.q),
+                        price: parseFloat(res.p),
                         status: res.st,
-                        filledSize: res.cfq,
-                        remainingSize: res.q - res.cfq,
-                        avgFillPrice: res.ap
+                        filledSize: parseFloat(res.cfq),
+                        remainingSize: parseFloat(res.q) - parseFloat(res.cfq),
+                        avgFillPrice: parseFloat(res.ap)
                     };
                     this.params.onOrder(order);
                 }

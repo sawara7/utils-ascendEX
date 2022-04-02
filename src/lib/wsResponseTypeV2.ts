@@ -11,18 +11,18 @@ export interface OrderInfoV2 extends BaseResponse {
     orderId: string // order Id
     sd     : string // side 
     ot     : string // order type 
-    q      : number // order quantity (base asset)
-    p      : number // order price
-    sp     : number // stop price
+    q      : string // order quantity (base asset)
+    p      : string // order price
+    sp     : string // stop price
     spb    : string // stop trigger
     s      : string // symbol 
     st     : string // order status
-    lp     : number // last filled price
-    lq     : number // last filled quantity (base asset)
-    ap     : number // average filled price
-    cfq    : number // cummulative filled quantity (base asset)
-    f      : number // commission fee of the current execution
-    cf     : number // cumulative commission fee
+    lp     : string // last filled price
+    lq     : string // last filled quantity (base asset)
+    ap     : string // average filled price
+    cfq    : string // cummulative filled quantity (base asset)
+    f      : string // commission fee of the current execution
+    cf     : string // cumulative commission fee
     fa     : string // fee asset
     ei     : string // execution instruction
     err    : string // error message

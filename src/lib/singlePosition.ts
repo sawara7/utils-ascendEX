@@ -303,7 +303,7 @@ export class SinglePosition {
                 }
             }
         }
-        if (order.id === this._closeID && order.status === 'closed') {
+        if (order.id === this._closeID && ['Filled', 'Canceled'].includes(order.status)) {
             this.resetClose()
             const size = this.roundSize(order.size)
             const filled = this.roundSize(order.filledSize)
