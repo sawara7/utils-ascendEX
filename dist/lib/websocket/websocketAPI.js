@@ -27,6 +27,13 @@ exports.WebsocketAPI = void 0;
 const ws_1 = require("ws");
 const crypto = __importStar(require("crypto"));
 class WebsocketAPI {
+    static toSha256(key, value) {
+        return crypto
+            .createHmac('sha256', key)
+            .update(Buffer.from(value))
+            .digest('hex')
+            .toString();
+    }
     constructor(params) {
         this.params = params;
         this.onOpen = () => {
@@ -155,13 +162,6 @@ class WebsocketAPI {
             'wss://ascendex.com/' + this._accountGroup + '/api/pro/v1/stream';
         this.socket = new ws_1.WebSocket(this._path);
         this.initializeWebSocket();
-    }
-    static toSha256(key, value) {
-        return crypto
-            .createHmac('sha256', key)
-            .update(Buffer.from(value))
-            .digest('hex')
-            .toString();
     }
     initializeWebSocket() {
         if (this.pingIntervalID) {

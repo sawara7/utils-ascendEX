@@ -1,6 +1,6 @@
 import { BaseRequest } from "./wsRequestTypeCommon";
-export declare type OrderTypeV2 = "cancel-order" | "place-order" | "cancel-all";
-export declare type AccountCategoryV2 = "futures";
+export type OrderTypeV2 = "cancel-order" | "place-order" | "cancel-all";
+export type AccountCategoryV2 = "futures";
 export interface OrderRequestV2<T> extends BaseRequest {
     action: OrderTypeV2;
     ac: AccountCategoryV2;

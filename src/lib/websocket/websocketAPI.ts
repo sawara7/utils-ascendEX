@@ -1,23 +1,38 @@
 import { WebSocket, MessageEvent } from 'ws'
 import * as crypto from 'crypto'
-import {
+import { 
     AuthRequest,
+    SubscribeChannelRequest
+} from './wsRequestTypeCommon';
+
+import {
+    CancelOrderRequestV1,
+    OrderRequestV1,
+    PlaceOrderRequestV1
+} from './wsRequestTypeV1';
+
+import {
+    PlaceOrderRequestV2,
+    OrderRequestV2,
+    CancelOrderRequestV2
+} from './wsRequestTypeV2';
+
+import {
     AuthResponse,
     BaseResponse,
     BBOResponse,
-    CancelOrderRequestV1,
-    ConnectedResponse,
-    OrderRequestV1,
-    OrderInfoV1,
+    ConnectedResponse
+} from './wsResponseTypeCommon';
+
+import {
+    OrderInfoV1
+} from './wsResponseTypeV1';
+
+import {
     OrderInfoV2,
-    PlaceOrderRequestV1,
-    SubscribeChannelRequest,
-    PlaceOrderRequestV2,
-    OrderRequestV2,
-    CancelOrderRequestV2,
     OrderResponseV2,
     OrderResponseInfo
-} from '..';
+} from './wsResponseTypeV2';
 
 export interface wsTrade {
     id: number;

@@ -8,22 +8,26 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "install-rimraf": "npm install --save-dev rimraf",
+    "cleanup": "rimraf package-lock.json && rimraf dist && rimraf node_modules",
+    "build": "npm run install-rimraf && npm run cleanup && npm install && tsc",
+    "tsc": "tsc",
+    "test": "jest"
   },
   "author": "sawara",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.34",
+    "rimraf": "^4.4.1",
     "typescript": "^4.3.5"
   },
-  "bundleDependencies": false,
+  "bundleDependencies": [],
   "dependencies": {
     "@types/ws": "^8.2.2",
-    "querystring": "^0.2.1",
-    "ws": "^8.3.0",
+    "axios": "^0.21.1",
     "my-utils": "github:sawara7/my-utils",
-    "mongodb-utils": "github:sawara7/mongodb-utils",
-    "firebase-utils-server": "github:sawara7/firebase-utils-server",
-    "slack-notification": "github:sawara7/slack-notification"
+    "querystring": "^0.2.1",
+    "trade-utils": "github:sawara7/trade-utils",
+    "ws": "^8.3.0"
   }
 }

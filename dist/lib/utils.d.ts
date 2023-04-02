@@ -1,2 +1,2 @@
-export declare type OrderSide = 'buy' | 'sell';
-export declare type OrderType = 'limit' | 'market';
+export type OrderSide = 'buy' | 'sell';
+export type OrderType = 'limit' | 'market';

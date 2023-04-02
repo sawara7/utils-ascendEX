@@ -14,12 +14,19 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./lib/wsRequestTypeCommon"), exports);
-__exportStar(require("./lib/wsResponseTypeCommon"), exports);
-__exportStar(require("./lib/wsRequestTypeV1"), exports);
-__exportStar(require("./lib/wsResponseTypeV1"), exports);
-__exportStar(require("./lib/wsRequestTypeV2"), exports);
-__exportStar(require("./lib/wsResponseTypeV2"), exports);
-__exportStar(require("./lib/websocketAPI"), exports);
-__exportStar(require("./lib/websocketClient"), exports);
-__exportStar(require("./lib/singlePosition"), exports);
+// Websocket
+__exportStar(require("./lib/websocket/wsRequestTypeCommon"), exports);
+__exportStar(require("./lib/websocket/wsResponseTypeCommon"), exports);
+__exportStar(require("./lib/websocket/wsRequestTypeV1"), exports);
+__exportStar(require("./lib/websocket/wsResponseTypeV1"), exports);
+__exportStar(require("./lib/websocket/wsRequestTypeV2"), exports);
+__exportStar(require("./lib/websocket/wsResponseTypeV2"), exports);
+__exportStar(require("./lib/websocket/websocketAPI"), exports);
+// export * from './lib/websocket/websocketClient'
+// REST API
+__exportStar(require("./lib/restapi/baseAPI"), exports);
+__exportStar(require("./lib/restapi/privateAPI"), exports);
+__exportStar(require("./lib/restapi/publicAPI"), exports);
+__exportStar(require("./lib/restapi/requestType"), exports);
+__exportStar(require("./lib/restapi/responseType"), exports);
+// export * from './lib/singlePosition'

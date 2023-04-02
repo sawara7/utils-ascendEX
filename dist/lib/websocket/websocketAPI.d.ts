@@ -1,4 +1,5 @@
-import { CancelOrderRequestV1, PlaceOrderRequestV1, PlaceOrderRequestV2, CancelOrderRequestV2 } from '..';
+import { CancelOrderRequestV1, PlaceOrderRequestV1 } from './wsRequestTypeV1';
+import { PlaceOrderRequestV2, CancelOrderRequestV2 } from './wsRequestTypeV2';
 export interface wsTrade {
     id: number;
     time: string;
