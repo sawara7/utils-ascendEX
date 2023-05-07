@@ -1,3 +1,4 @@
+import { V1OrderSide, V2FutureOrderSide } from "../utils";
 export declare const ASCENDEX_ENDPOINT = "https://ascendex.com/";
 export interface GetMarginAccountBalanceRequest {
     asset?: string;
@@ -8,7 +9,7 @@ export interface PlaceOrderRequest {
     time: number;
     orderQty: string;
     orderType: "limit" | "market" | "stop_limit" | "stop_market";
-    side: "buy" | "sell";
+    side: V1OrderSide;
     id?: string;
     orderPrice?: string;
     stopPrice?: string;
@@ -23,7 +24,7 @@ export interface PlaceFutureOrderRequest {
     orderPrice?: string;
     orderQty: string;
     orderType: "Limit" | "Market" | "StopLimit" | "StopMarket";
-    side: "Buy" | "Sell";
+    side: V2FutureOrderSide;
     respInst?: "ACK" | "DONE";
     postOnly?: boolean;
     stopPrice?: string;

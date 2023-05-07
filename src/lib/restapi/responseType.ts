@@ -1,3 +1,4 @@
+import { V2FutureOrderSide } from "../utils";
 
 export interface ASDResponse<T> {
     code: number;
@@ -101,7 +102,7 @@ export interface PlaceFutureOrderInfo {
     time: number; // milliseconds since UNIX epoch in UTC
     orderId: string; // order id e.g. "sample-order-id"
     orderType: "Limit" | "Market" | "StopLimit" | "StopMarket"; // order type
-    side: "Buy" | "Sell"; // order side
+    side: V2FutureOrderSide; // order side
     symbol: string; // symbol e.g. "BTC-PERP"
     price: string; // order price
     orderQty: string; // order quantity
@@ -152,7 +153,7 @@ export interface OrderInfo {
     posTakeProfitTrigger: "None"; // position take profit trigger
     price: string; // order price
     seqNum: number; // sequence number, also -1 in ACK mode
-    side: "Buy" | "Sell"; // order side
+    side: V2FutureOrderSide; // order side
     status: "New" | "PartiallyFilled" | "Filled" | "Cancelled" | "Rejected"; // order status
     stopBy: "" | "market" | "limit"; // stop by
     stopPrice: string; // stop price

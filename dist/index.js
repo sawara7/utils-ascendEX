@@ -30,3 +30,4 @@ __exportStar(require("./lib/restapi/publicAPI"), exports);
 __exportStar(require("./lib/restapi/requestType"), exports);
 __exportStar(require("./lib/restapi/responseType"), exports);
 // export * from './lib/singlePosition'
+__exportStar(require("./lib/utils"), exports);

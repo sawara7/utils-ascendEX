@@ -65,6 +65,13 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
             return yield this.get(path, 'data/v1/futures/balance/snapshot', { date: date });
         });
     }
+    getFutureOrderInfo(orderId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const path = this._accountGroup + '/api/pro/v2/futures/order/status';
+            yield this.sleepWhileOrderInterval(this._apiKey);
+            return yield this.get(path, 'v2/futures/order/status', { orderId: orderId });
+        });
+    }
     getFuturePosition() {
         return __awaiter(this, void 0, void 0, function* () {
             const path = this._accountGroup + '/api/pro/v2/futures/position';
@@ -107,13 +114,6 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
             const path = this._accountGroup + '/api/pro/v1/margin/order';
             yield this.sleepWhileOrderInterval(this._apiKey);
             return yield this.post(path, 'order', req);
-        });
-    }
-    getOrderInfo(orderId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v2/futures/order/status';
-            yield this.sleepWhileOrderInterval(this._apiKey);
-            return yield this.get(path, 'v2/futures/order/status', { orderId: orderId });
         });
     }
     getMarginAccountBalance(params) {

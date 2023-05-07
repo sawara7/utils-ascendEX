@@ -18,13 +18,13 @@ export declare class ASDPrivateApiClass extends BaseApiClass {
     private _minOrderInterval;
     constructor(config: ASDPrivateApiConfig);
     getFuturesAccountBalanceSnapshot(date: string): Promise<FuturesAccountBalanceSnapshot>;
+    getFutureOrderInfo(orderId: string): Promise<ASDResponse<OrderInfo>>;
     getFuturePosition(): Promise<ASDResponse<PositionResponse>>;
     placeFutureOrder(req: PlaceFutureOrderRequest): Promise<ASDResponse<PlaceFutureOrderInfo>>;
     cancelFutureOrder(req: CancelOrderRequest): Promise<ASDResponse<CancelOrderResponse>>;
     cancelFutureOrderBatch(req: CancelOrderRequest[]): Promise<ASDResponse<CancelBatchOrderResponse>>;
     cancelFutureOrderAll(symbol: string): Promise<ASDResponse<CancelBatchOrderResponse>>;
     placeMarginOrder(req: PlaceOrderRequest): Promise<ASDResponse<PlaceFutureOrderInfo>>;
-    getOrderInfo(orderId: string): Promise<ASDResponse<OrderInfo>>;
     getMarginAccountBalance(params: GetMarginAccountBalanceRequest): Promise<ASDResponse<MarginAccountBalance>>;
     getMarginRiskProfile(): Promise<ASDResponse<MarginRiskProfile>>;
     get<T>(path: string, apiPath: string, query?: {}): Promise<any>;

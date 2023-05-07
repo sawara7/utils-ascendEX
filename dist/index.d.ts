@@ -10,3 +10,4 @@ export * from './lib/restapi/privateAPI';
 export * from './lib/restapi/publicAPI';
 export * from './lib/restapi/requestType';
 export * from './lib/restapi/responseType';
+export * from './lib/utils';

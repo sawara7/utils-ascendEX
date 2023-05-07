@@ -49,6 +49,12 @@ export class ASDPrivateApiClass extends BaseApiClass {
         return await this.get(path, 'data/v1/futures/balance/snapshot', {date: date})
     }
 
+    public async getFutureOrderInfo(orderId: string): Promise<ASDResponse<OrderInfo>> {
+        const path = this._accountGroup + '/api/pro/v2/futures/order/status'
+        await this.sleepWhileOrderInterval(this._apiKey)
+        return await this.get(path, 'v2/futures/order/status', {orderId: orderId})
+    }
+
     public async getFuturePosition(): Promise<ASDResponse<PositionResponse>> {
         const path = this._accountGroup + '/api/pro/v2/futures/position'
         await this.sleepWhileOrderInterval(this._apiKey)
@@ -84,12 +90,6 @@ export class ASDPrivateApiClass extends BaseApiClass {
         const path = this._accountGroup + '/api/pro/v1/margin/order'
         await this.sleepWhileOrderInterval(this._apiKey)
         return await this.post(path, 'order', req)
-    }
-
-    public async getOrderInfo(orderId: string): Promise<ASDResponse<OrderInfo>> {
-        const path = this._accountGroup + '/api/pro/v2/futures/order/status'
-        await this.sleepWhileOrderInterval(this._apiKey)
-        return await this.get(path, 'v2/futures/order/status', {orderId: orderId})
     }
 
     public async getMarginAccountBalance(params: GetMarginAccountBalanceRequest): Promise<ASDResponse<MarginAccountBalance>> {

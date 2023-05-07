@@ -1,3 +1,5 @@
+import { V1OrderSide, V2FutureOrderSide } from "../utils";
+
 export const ASCENDEX_ENDPOINT = 'https://ascendex.com/'
 
 export interface GetMarginAccountBalanceRequest {
@@ -10,7 +12,7 @@ export interface PlaceOrderRequest {
   time: number; // required, milliseconds since UNIX epoch in UTC
   orderQty: string; // required, order size
   orderType: "limit" | "market" | "stop_limit" | "stop_market"; // required, order type
-  side: "buy" | "sell"; // required
+  side: V1OrderSide; // required
   id?: string; // optional but recommended, >=9 chars(letter and digit number only)
   orderPrice?: string; // optional, the limit price for limit order
   stopPrice?: string; // optional, trigger price of stop limit order
@@ -26,7 +28,7 @@ export interface PlaceFutureOrderRequest {
   orderPrice?: string; // Required for Limit and StopLimit orders
   orderQty: string; // Order size. Please set scale properly for each symbol.
   orderType: "Limit" | "Market" | "StopLimit" | "StopMarket"; // 
-  side: "Buy" | "Sell"; // 
+  side: V2FutureOrderSide; // 
   respInst?: "ACK" | "DONE"; // ACK for limit order and Done for market order by default
   postOnly?: boolean; // false by default
   stopPrice?: string; // required for StopLimit and StopMarket orders

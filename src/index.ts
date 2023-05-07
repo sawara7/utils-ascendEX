@@ -16,3 +16,4 @@ export * from './lib/restapi/requestType'
 export * from './lib/restapi/responseType'
 
 // export * from './lib/singlePosition'
+export * from './lib/utils'

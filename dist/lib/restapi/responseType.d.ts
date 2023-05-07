@@ -1,3 +1,4 @@
+import { V2FutureOrderSide } from "../utils";
 export interface ASDResponse<T> {
     code: number;
     accountId?: string;
@@ -92,7 +93,7 @@ export interface PlaceFutureOrderInfo {
     time: number;
     orderId: string;
     orderType: "Limit" | "Market" | "StopLimit" | "StopMarket";
-    side: "Buy" | "Sell";
+    side: V2FutureOrderSide;
     symbol: string;
     price: string;
     orderQty: string;
@@ -140,7 +141,7 @@ export interface OrderInfo {
     posTakeProfitTrigger: "None";
     price: string;
     seqNum: number;
-    side: "Buy" | "Sell";
+    side: V2FutureOrderSide;
     status: "New" | "PartiallyFilled" | "Filled" | "Cancelled" | "Rejected";
     stopBy: "" | "market" | "limit";
     stopPrice: string;
