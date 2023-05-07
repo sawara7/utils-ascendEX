@@ -32,3 +32,10 @@ export interface PlaceFutureOrderRequest {
     posStopLossPrice?: string;
     posTakeProfitPrice?: string;
 }
+export interface CancelOrderRequest {
+    id?: string;
+    orderId: string;
+    symbol: string;
+    time: number;
+    respInst?: string;
+}

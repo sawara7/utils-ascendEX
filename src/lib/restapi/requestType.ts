@@ -35,3 +35,11 @@ export interface PlaceFutureOrderRequest {
   posStopLossPrice?: string; // position stop loss price
   posTakeProfitPrice?: string; // position take profit price
 }
+
+export interface CancelOrderRequest {
+  id?: string;       // >=9 chars (letter and digit number only). Optional but recommended.
+  orderId: string;   // 32 chars order id.
+  symbol: string;    // Symbol of the order to cancel.
+  time: number;      // milliseconds since UNIX epoch in UTC.
+  respInst?: string; // ACK by default.
+}

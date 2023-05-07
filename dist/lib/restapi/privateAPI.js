@@ -58,6 +58,13 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
             ASDPrivateApiClass._lastOrderTime = {};
         }
     }
+    getFuturesAccountBalanceSnapshot(date) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const path = this._accountGroup + '/api/pro/data/v1/futures/balance/snapshot';
+            yield this.sleepWhileOrderInterval(this._apiKey);
+            return yield this.get(path, 'data/v1/futures/balance/snapshot', { date: date });
+        });
+    }
     getFuturePosition() {
         return __awaiter(this, void 0, void 0, function* () {
             const path = this._accountGroup + '/api/pro/v2/futures/position';
@@ -65,18 +72,41 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
             return yield this.get(path, 'v2/futures/position', {});
         });
     }
-    placeMarginOrder(req) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v1/margin/order';
-            yield this.sleepWhileOrderInterval(this._apiKey);
-            return yield this.post(path, 'order', req);
-        });
-    }
     placeFutureOrder(req) {
         return __awaiter(this, void 0, void 0, function* () {
             const path = this._accountGroup + '/api/pro/v2/futures/order';
             yield this.sleepWhileOrderInterval(this._apiKey);
             return yield this.post(path, 'v2/futures/order', req, req.time);
+        });
+    }
+    cancelFutureOrder(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const path = this._accountGroup + '/api/pro/v2/futures/order';
+            yield this.sleepWhileOrderInterval(this._apiKey);
+            return yield this.delete(path, 'v2/futures/order', req, req.time);
+        });
+    }
+    cancelFutureOrderBatch(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (req.length === 0)
+                throw new Error('no Requests.');
+            const path = this._accountGroup + '/api/pro/v2/futures/order/batch';
+            yield this.sleepWhileOrderInterval(this._apiKey);
+            return yield this.delete(path, 'v2/futures/order/batch', { orders: req }, req[0].time);
+        });
+    }
+    cancelFutureOrderAll(symbol) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const path = this._accountGroup + '/api/pro/v2/futures/order/all';
+            yield this.sleepWhileOrderInterval(this._apiKey);
+            return yield this.delete(path, 'v2/futures/order/all', { symbol: symbol }, Date.now());
+        });
+    }
+    placeMarginOrder(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const path = this._accountGroup + '/api/pro/v1/margin/order';
+            yield this.sleepWhileOrderInterval(this._apiKey);
+            return yield this.post(path, 'order', req);
         });
     }
     getOrderInfo(orderId) {
@@ -110,12 +140,12 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
     post(path, apiPath, body, ts) {
         return super.post(path, body, this.makeHeader(apiPath, ts));
     }
-    delete(path, apiPath, query) {
+    delete(path, apiPath, query, ts) {
         let queryPath = path;
         if (query && Object.keys(query).length > 0) {
             queryPath += '?' + querystring.encode(query);
         }
-        return super.delete(queryPath, query, this.makeHeader(apiPath));
+        return super.delete(queryPath, query, this.makeHeader(apiPath, ts));
     }
     makeHeader(path, timestamp) {
         const ts = timestamp ? timestamp : Date.now();

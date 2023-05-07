@@ -190,3 +190,56 @@ export interface FuturePricingData {
     contracts: FutureContract[];
     collaterals: FutureCollaterals[];
 }
+export interface CancelOrderResponse {
+    meta: MetaInfo;
+    order: CancelOrderInfo;
+}
+export interface CancelBatchOrderResponse {
+    meta: MetaInfo;
+    orders: CancelOrderInfo[];
+}
+export interface CancelOrderInfo {
+    ac: string;
+    accountId: string;
+    seqNum: number;
+    time: number;
+    orderId: string;
+    orderType: string;
+    side: string;
+    symbol: string;
+    price: string;
+    orderQty: string;
+    stopPrice: string;
+    stopBy: string;
+    status: string;
+    lastExecTime: number;
+    lastPx: string;
+    lastQty: string;
+    avgFilledPx: string;
+    cumFilledQty: string;
+    fee: string;
+    cumFee: string;
+    feeAsset: string;
+    errorCode: string;
+}
+export interface FuturesAccountBalanceSnapshot {
+    meta: BalanceMetaInfo;
+    collateralBalance: CollateralBalance[];
+    contractBalance: ContractBalance[];
+}
+export interface BalanceMetaInfo {
+    ac: string;
+    accountId: string;
+    sn: number;
+    balanceTime: number;
+}
+export interface ContractBalance {
+    contract: string;
+    futuresAssetBalance: string;
+    isolatedMargin: string;
+    refCostBalance: string;
+}
+export interface CollateralBalance {
+    asset: string;
+    totalBalance: string;
+}

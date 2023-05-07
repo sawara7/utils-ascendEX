@@ -210,3 +210,64 @@ export interface BlockchainSpecificDetails {
     contracts: FutureContract[]
     collaterals: FutureCollaterals[]
   }
+
+
+  export interface CancelOrderResponse {
+    meta: MetaInfo
+    order: CancelOrderInfo
+  }
+
+  export interface CancelBatchOrderResponse {
+    meta: MetaInfo
+    orders: CancelOrderInfo[]
+  }
+
+  export interface CancelOrderInfo {
+    ac: string;           // account category
+    accountId: string;    // account ID
+    seqNum: number;       // sequence number
+    time: number;         // order creation time
+    orderId: string;      // order ID
+    orderType: string;    // order type
+    side: string;         // order side
+    symbol: string;       // contract symbol
+    price: string;        // order price
+    orderQty: string;     // order quantity
+    stopPrice: string;    // stop price
+    stopBy: string;       // stop price trigger
+    status: string;       // order status
+    lastExecTime: number; // last execution time
+    lastPx: string;       // last filled price
+    lastQty: string;      // last filled quantity
+    avgFilledPx: string;  // average filled price of all fills
+    cumFilledQty: string; // cumulative filled quantity
+    fee: string;          // fee of the last fill
+    cumFee: string;       // cumulative fee
+    feeAsset: string;     // fee asset
+    errorCode: string;    // error code
+  }
+
+  export interface FuturesAccountBalanceSnapshot {
+    meta: BalanceMetaInfo;              // meta info
+    collateralBalance: CollateralBalance[]; // collateral balance info
+    contractBalance: ContractBalance[];     // contract balance info
+  }
+
+  export interface BalanceMetaInfo {
+    ac: string;          // account category
+    accountId: string;   // account ID
+    sn: number;          // sequence number
+    balanceTime: number; // balance snapshot time in milliseconds
+  }
+
+  export interface ContractBalance {
+    contract: string;         // contract name
+    futuresAssetBalance: string;  // current contract position
+    isolatedMargin: string;   // Isolated margin
+    refCostBalance: string;   // Reference cost
+  }
+
+  export interface CollateralBalance {
+    asset: string;       // asset code
+    totalBalance: string; // current asset total balance
+  }

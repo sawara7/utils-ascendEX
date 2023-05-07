@@ -1,7 +1,7 @@
 import * as crypto from 'crypto'
 import { ApiConfig, BaseApiClass } from './baseAPI'
-import { ASCENDEX_ENDPOINT, GetMarginAccountBalanceRequest, PlaceFutureOrderRequest, PlaceOrderRequest } from './requestType'
-import { ASDResponse, MarginAccountBalance, MarginRiskProfile, OrderInfo, PlaceFutureOrderInfo, PositionResponse } from './responseType'
+import { ASCENDEX_ENDPOINT, CancelOrderRequest, GetMarginAccountBalanceRequest, PlaceFutureOrderRequest, PlaceOrderRequest } from './requestType'
+import { ASDResponse, CancelBatchOrderResponse, CancelOrderResponse, FuturesAccountBalanceSnapshot, MarginAccountBalance, MarginRiskProfile, OrderInfo, PlaceFutureOrderInfo, PositionResponse } from './responseType'
 import * as querystring from 'querystring'
 import { sleep } from 'my-utils'
 
@@ -43,22 +43,47 @@ export class ASDPrivateApiClass extends BaseApiClass {
         }
     }
 
+    public async getFuturesAccountBalanceSnapshot(date: string): Promise<FuturesAccountBalanceSnapshot> {
+        const path = this._accountGroup + '/api/pro/data/v1/futures/balance/snapshot'
+        await this.sleepWhileOrderInterval(this._apiKey)
+        return await this.get(path, 'data/v1/futures/balance/snapshot', {date: date})
+    }
+
     public async getFuturePosition(): Promise<ASDResponse<PositionResponse>> {
         const path = this._accountGroup + '/api/pro/v2/futures/position'
         await this.sleepWhileOrderInterval(this._apiKey)
         return await this.get(path, 'v2/futures/position', {})
     }
 
-    public async placeMarginOrder(req: PlaceOrderRequest): Promise<ASDResponse<PlaceFutureOrderInfo>> {
-        const path = this._accountGroup + '/api/pro/v1/margin/order'
-        await this.sleepWhileOrderInterval(this._apiKey)
-        return await this.post(path, 'order', req)
-    }
-
     public async placeFutureOrder(req: PlaceFutureOrderRequest): Promise<ASDResponse<PlaceFutureOrderInfo>> {
         const path = this._accountGroup + '/api/pro/v2/futures/order'
         await this.sleepWhileOrderInterval(this._apiKey)
         return await this.post(path, 'v2/futures/order', req, req.time)
+    }
+
+    public async cancelFutureOrder(req: CancelOrderRequest): Promise<ASDResponse<CancelOrderResponse>> {
+        const path = this._accountGroup + '/api/pro/v2/futures/order'
+        await this.sleepWhileOrderInterval(this._apiKey)
+        return await this.delete(path, 'v2/futures/order', req, req.time)
+    }
+
+    public async cancelFutureOrderBatch(req: CancelOrderRequest[]): Promise<ASDResponse<CancelBatchOrderResponse>> {
+        if (req.length === 0) throw new Error('no Requests.')
+        const path = this._accountGroup + '/api/pro/v2/futures/order/batch'
+        await this.sleepWhileOrderInterval(this._apiKey)
+        return await this.delete(path, 'v2/futures/order/batch', {orders: req}, req[0].time)
+    }
+
+    public async cancelFutureOrderAll(symbol: string): Promise<ASDResponse<CancelBatchOrderResponse>> {
+        const path = this._accountGroup + '/api/pro/v2/futures/order/all'
+        await this.sleepWhileOrderInterval(this._apiKey)
+        return await this.delete(path, 'v2/futures/order/all', {symbol: symbol}, Date.now())
+    }
+
+    public async placeMarginOrder(req: PlaceOrderRequest): Promise<ASDResponse<PlaceFutureOrderInfo>> {
+        const path = this._accountGroup + '/api/pro/v1/margin/order'
+        await this.sleepWhileOrderInterval(this._apiKey)
+        return await this.post(path, 'order', req)
     }
 
     public async getOrderInfo(orderId: string): Promise<ASDResponse<OrderInfo>> {
@@ -91,12 +116,12 @@ export class ASDPrivateApiClass extends BaseApiClass {
         return super.post(path, body, this.makeHeader(apiPath, ts))
     }
 
-    delete<T>(path: string, apiPath: string, query?: {}) {
+    delete<T>(path: string, apiPath: string, query?: {}, ts?: number) {
         let queryPath = path
         if (query && Object.keys(query).length > 0) {
             queryPath += '?' + querystring.encode(query)
         }
-        return super.delete(queryPath, query, this.makeHeader(apiPath))
+        return super.delete(queryPath, query, this.makeHeader(apiPath, ts))
     }
 
     private makeHeader(path: string, timestamp?: number): any {
