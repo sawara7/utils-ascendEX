@@ -92,7 +92,7 @@ export class ASDPrivateApiClass extends BaseApiClass {
         return await this.post(path, 'order', req)
     }
 
-    public async getMarginAccountBalance(params: GetMarginAccountBalanceRequest): Promise<ASDResponse<MarginAccountBalance>> {
+    public async getMarginAccountBalance(params: GetMarginAccountBalanceRequest): Promise<ASDResponse<MarginAccountBalance[]>> {
         const path = this._accountGroup + '/api/pro/v1/margin/balance'
         await this.sleepWhileOrderInterval(this._apiKey)
         return await this.get(path, 'balance', params)

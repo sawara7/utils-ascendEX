@@ -25,7 +25,7 @@ export declare class ASDPrivateApiClass extends BaseApiClass {
     cancelFutureOrderBatch(req: CancelOrderRequest[]): Promise<ASDResponse<CancelBatchOrderResponse>>;
     cancelFutureOrderAll(symbol: string): Promise<ASDResponse<CancelBatchOrderResponse>>;
     placeMarginOrder(req: PlaceOrderRequest): Promise<ASDResponse<PlaceFutureOrderInfo>>;
-    getMarginAccountBalance(params: GetMarginAccountBalanceRequest): Promise<ASDResponse<MarginAccountBalance>>;
+    getMarginAccountBalance(params: GetMarginAccountBalanceRequest): Promise<ASDResponse<MarginAccountBalance[]>>;
     getMarginRiskProfile(): Promise<ASDResponse<MarginRiskProfile>>;
     getMarginOrderInfo(orderID: String): Promise<ASDResponse<OrderInfoMarginV1[]>>;
     getCashOrderInfo(orderID: String): Promise<ASDResponse<OrderInfoMarginV1[]>>;
