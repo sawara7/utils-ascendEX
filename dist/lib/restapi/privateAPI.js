@@ -163,7 +163,6 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
     }
     makeHeader(path, timestamp) {
         const ts = timestamp ? timestamp : Date.now();
-        console.log(ts);
         const s = ts + path;
         const sign = ASDPrivateApiClass.toSha256(this._apiSecret, s);
         const header = {
