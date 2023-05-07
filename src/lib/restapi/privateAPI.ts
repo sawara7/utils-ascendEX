@@ -1,7 +1,7 @@
 import * as crypto from 'crypto'
 import { ApiConfig, BaseApiClass } from './baseAPI'
 import { ASCENDEX_ENDPOINT, CancelOrderRequest, GetMarginAccountBalanceRequest, PlaceFutureOrderRequest, PlaceOrderRequest } from './requestType'
-import { ASDResponse, CancelBatchOrderResponse, CancelOrderResponse, FuturesAccountBalanceSnapshot, MarginAccountBalance, MarginRiskProfile, OrderInfo, PlaceFutureOrderInfo, PositionResponse } from './responseType'
+import { ASDResponse, CancelBatchOrderResponse, CancelOrderResponse, FuturesAccountBalanceSnapshot, MarginAccountBalance, MarginRiskProfile, OrderInfo, OrderInfoMarginV1, PlaceFutureOrderInfo, PositionResponse } from './responseType'
 import * as querystring from 'querystring'
 import { sleep } from 'my-utils'
 
@@ -102,6 +102,18 @@ export class ASDPrivateApiClass extends BaseApiClass {
         const path = this._accountGroup + '/api/pro/v1/margin/risk'
         await this.sleepWhileOrderInterval(this._apiKey)
         return await this.get(path, 'margin/risk', {})
+    }
+
+    public async getMarginOrderInfo(orderID: String): Promise<ASDResponse<OrderInfoMarginV1[]>> {
+        const path = this._accountGroup + '/api/pro/v1/margin/order/status?orderId=' + orderID
+        await this.sleepWhileOrderInterval(this._apiKey)
+        return await this.get(path, 'order/status', {})
+    }
+
+    public async getCashOrderInfo(orderID: String): Promise<ASDResponse<OrderInfoMarginV1[]>> {
+        const path = this._accountGroup + '/api/pro/v1/margin/order/status?orderId=' + orderID
+        await this.sleepWhileOrderInterval(this._apiKey)
+        return await this.get(path, 'order/status', {})
     }
 
     get<T>(path: string, apiPath: string, query?: {}) {

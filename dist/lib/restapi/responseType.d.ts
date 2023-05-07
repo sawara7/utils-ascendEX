@@ -1,4 +1,4 @@
-import { V2FutureOrderSide } from "../utils";
+import { V1OrderSide, V2FutureOrderSide } from "../utils";
 export interface ASDResponse<T> {
     code: number;
     accountId?: string;
@@ -243,4 +243,22 @@ export interface ContractBalance {
 export interface CollateralBalance {
     asset: string;
     totalBalance: string;
+}
+export interface OrderInfoMarginV1 {
+    symbol: string;
+    price: string;
+    orderQty: string;
+    orderType: string;
+    avgPx: string;
+    cumFee: string;
+    cumFilledQty: string;
+    errorCode: string;
+    feeAsset: string;
+    lastExecTime: number;
+    orderId: string;
+    seqNum: number;
+    side: V1OrderSide;
+    status: string;
+    stopPrice: string;
+    execInst: string;
 }

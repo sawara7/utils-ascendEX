@@ -1,6 +1,6 @@
 import { ApiConfig, BaseApiClass } from './baseAPI';
 import { CancelOrderRequest, GetMarginAccountBalanceRequest, PlaceFutureOrderRequest, PlaceOrderRequest } from './requestType';
-import { ASDResponse, CancelBatchOrderResponse, CancelOrderResponse, FuturesAccountBalanceSnapshot, MarginAccountBalance, MarginRiskProfile, OrderInfo, PlaceFutureOrderInfo, PositionResponse } from './responseType';
+import { ASDResponse, CancelBatchOrderResponse, CancelOrderResponse, FuturesAccountBalanceSnapshot, MarginAccountBalance, MarginRiskProfile, OrderInfo, OrderInfoMarginV1, PlaceFutureOrderInfo, PositionResponse } from './responseType';
 export interface ASDPrivateApiConfig extends ApiConfig {
     apiKey: string;
     apiSecret: string;
@@ -27,6 +27,8 @@ export declare class ASDPrivateApiClass extends BaseApiClass {
     placeMarginOrder(req: PlaceOrderRequest): Promise<ASDResponse<PlaceFutureOrderInfo>>;
     getMarginAccountBalance(params: GetMarginAccountBalanceRequest): Promise<ASDResponse<MarginAccountBalance>>;
     getMarginRiskProfile(): Promise<ASDResponse<MarginRiskProfile>>;
+    getMarginOrderInfo(orderID: String): Promise<ASDResponse<OrderInfoMarginV1[]>>;
+    getCashOrderInfo(orderID: String): Promise<ASDResponse<OrderInfoMarginV1[]>>;
     get<T>(path: string, apiPath: string, query?: {}): Promise<any>;
     post<T>(path: string, apiPath: string, body: {}, ts?: number): Promise<any>;
     delete<T>(path: string, apiPath: string, query?: {}, ts?: number): Promise<any>;

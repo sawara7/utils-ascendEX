@@ -130,6 +130,20 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
             return yield this.get(path, 'margin/risk', {});
         });
     }
+    getMarginOrderInfo(orderID) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const path = this._accountGroup + '/api/pro/v1/margin/order/status?orderId=' + orderID;
+            yield this.sleepWhileOrderInterval(this._apiKey);
+            return yield this.get(path, 'order/status', {});
+        });
+    }
+    getCashOrderInfo(orderID) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const path = this._accountGroup + '/api/pro/v1/margin/order/status?orderId=' + orderID;
+            yield this.sleepWhileOrderInterval(this._apiKey);
+            return yield this.get(path, 'order/status', {});
+        });
+    }
     get(path, apiPath, query) {
         let queryPath = path;
         if (query && Object.keys(query).length > 0) {
