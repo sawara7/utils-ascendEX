@@ -291,3 +291,19 @@ export interface BlockchainSpecificDetails {
     stopPrice: string;
     execInst: string;
   }
+
+  export interface PlaceMarginOrderResponse {
+    ac: string;
+    accountId: string;
+    action: string;
+    info: PlaceMarginOrderInfo;
+    status: string;
+  }
+  
+  export interface PlaceMarginOrderInfo {
+    id: string;
+    orderId: string;
+    orderType: string;
+    symbol: string;
+    timestamp: number;
+  }

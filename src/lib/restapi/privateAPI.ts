@@ -1,7 +1,7 @@
 import * as crypto from 'crypto'
 import { ApiConfig, BaseApiClass } from './baseAPI'
 import { ASCENDEX_ENDPOINT, CancelOrderRequest, GetMarginAccountBalanceRequest, PlaceFutureOrderRequest, PlaceOrderRequest } from './requestType'
-import { ASDResponse, CancelBatchOrderResponse, CancelOrderResponse, FuturesAccountBalanceSnapshot, MarginAccountBalance, MarginRiskProfile, OrderInfo, OrderInfoMarginV1, PlaceFutureOrderInfo, PositionResponse } from './responseType'
+import { ASDResponse, CancelBatchOrderResponse, CancelOrderResponse, FuturesAccountBalanceSnapshot, MarginAccountBalance, MarginRiskProfile, OrderInfo, OrderInfoMarginV1, PlaceFutureOrderInfo, PlaceMarginOrderResponse, PlaceOrderResponce, PositionResponse } from './responseType'
 import * as querystring from 'querystring'
 import { sleep } from 'my-utils'
 
@@ -86,7 +86,7 @@ export class ASDPrivateApiClass extends BaseApiClass {
         return await this.delete(path, 'v2/futures/order/all', {symbol: symbol}, Date.now())
     }
 
-    public async placeMarginOrder(req: PlaceOrderRequest): Promise<ASDResponse<PlaceFutureOrderInfo>> {
+    public async placeMarginOrder(req: PlaceOrderRequest): Promise<ASDResponse<PlaceMarginOrderResponse>> {
         const path = this._accountGroup + '/api/pro/v1/margin/order'
         await this.sleepWhileOrderInterval(this._apiKey)
         return await this.post(path, 'order', req)
