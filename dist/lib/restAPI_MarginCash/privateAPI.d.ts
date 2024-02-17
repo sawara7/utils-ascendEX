@@ -13,7 +13,7 @@ export declare class ASDPrivateCashMarginApiClass extends ASDPrivateApiClass {
     constructor(config: ASDPrivateApiConfig);
     placeCashMarginOrder(type: AccountCategory, req: PlaceCashMarginOrderRequest): Promise<ASDResponse<ASDCashMarginOrderResponse<CashMarginOrderInfo>>>;
     cancelCashMarginOrder(type: AccountCategory, req: CancelCashMarginOrderRequest): Promise<ASDResponse<ASDCashMarginOrderResponse<CashMarginCancelInfo>>>;
-    getCashMarginOrderInfo(type: AccountCategory, orderIDs: String[]): Promise<ASDResponse<OrderInfoMarginV1[]>>;
+    getCashMarginOrderInfo(type: AccountCategory, orderIDs: String[]): Promise<ASDResponse<OrderInfoMarginV1[] | OrderInfoMarginV1>>;
     getCashMarginOpenOrderInfo(type: AccountCategory): Promise<ASDResponse<OrderInfoMarginV1[]>>;
     getCashMarginAccountBalance(params: GetCashMarginAccountBalanceRequest): Promise<ASDResponse<CashMarginAccountBalance[]>>;
     getCashMarginRiskProfile(type: AccountCategory): Promise<ASDResponse<CashMarginRiskProfile>>;

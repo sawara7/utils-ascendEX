@@ -46,7 +46,7 @@ export class ASDPrivateCashMarginApiClass  extends ASDPrivateApiClass {
         return await this.delete(path, 'order', req)
     }
 
-    public async getCashMarginOrderInfo(type: AccountCategory, orderIDs: String[]): Promise<ASDResponse<OrderInfoMarginV1[]>> {
+    public async getCashMarginOrderInfo(type: AccountCategory, orderIDs: String[]): Promise<ASDResponse<OrderInfoMarginV1[] | OrderInfoMarginV1>> {
         const ods = orderIDs.toString()
         const path = this.accountGroup + '/api/pro/v1/' + type + '/order/status?orderId=' + ods
         return await this.get(path, 'order/status', {})
