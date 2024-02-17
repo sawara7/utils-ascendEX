@@ -34,6 +34,12 @@ class ASDPrivateCashMarginApiClass extends restAPI_Base_1.ASDPrivateApiClass {
             return yield this.get(path, 'order/status', {});
         });
     }
+    getCashMarginOpenOrderInfo(type, symbol) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const path = this.accountGroup + '/api/pro/v1/' + type + '/order/open';
+            return yield this.get(path, 'order/status', { symbol: symbol });
+        });
+    }
     getCashMarginAccountBalance(params) {
         return __awaiter(this, void 0, void 0, function* () {
             const path = this.accountGroup + '/api/pro/v1/cash/balance';

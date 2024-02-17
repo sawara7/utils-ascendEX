@@ -52,6 +52,11 @@ export class ASDPrivateCashMarginApiClass  extends ASDPrivateApiClass {
         return await this.get(path, 'order/status', {})
     }
 
+    public async getCashMarginOpenOrderInfo(type: AccountCategory, symbol: string): Promise<ASDResponse<CashMarginOrderInfo[]>> {
+        const path = this.accountGroup + '/api/pro/v1/' + type + '/order/open'
+        return await this.get(path, 'order/status', {symbol: symbol})
+    }
+
     public async getCashMarginAccountBalance(params: GetCashMarginAccountBalanceRequest): Promise<ASDResponse<CashMarginAccountBalance[]>> {
         const path = this.accountGroup + '/api/pro/v1/cash/balance'
         return await this.get(path, 'balance', params)
