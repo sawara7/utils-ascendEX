@@ -48,9 +48,9 @@ class BaseApiClass {
             return this.request('PUT', path, undefined, data, headers);
         });
     }
-    delete(path, params, headers) {
+    delete(path, data, headers) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.request('DELETE', path, params, undefined, headers);
+            return this.request('DELETE', path, undefined, data, headers);
         });
     }
     request(method, path, params, data, headers) {

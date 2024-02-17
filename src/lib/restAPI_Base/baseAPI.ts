@@ -46,8 +46,8 @@ export class BaseApiClass {
         return this.request('PUT', path, undefined, data, headers);
     }
 
-    async delete(path: string, params?: {}, headers?: {}) {
-        return this.request('DELETE', path, params, undefined, headers);
+    async delete(path: string, data?: {}, headers?: {}) {
+        return this.request('DELETE', path, undefined, data, headers);
     }
 
     async request(method: Method, path: string, params?: {}, data?: {}, headers?: {}) {

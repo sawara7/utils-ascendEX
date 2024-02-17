@@ -22,6 +22,6 @@ export declare class BaseApiClass {
     get(path: string, params?: {}, headers?: {}): Promise<any>;
     post(path: string, data?: {}, headers?: {}): Promise<any>;
     put(path: string, data?: {}, headers?: {}): Promise<any>;
-    delete(path: string, params?: {}, headers?: {}): Promise<any>;
+    delete(path: string, data?: {}, headers?: {}): Promise<any>;
     request(method: Method, path: string, params?: {}, data?: {}, headers?: {}): Promise<any>;
 }
