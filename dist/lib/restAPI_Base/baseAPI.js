@@ -12,9 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BaseApiClass = exports.AscendEXApiError = exports.ASD_API_NAME = void 0;
+exports.BaseApiClass = exports.AscendEXApiError = void 0;
 const axios_1 = __importDefault(require("axios"));
-exports.ASD_API_NAME = 'asd';
 class AscendEXApiError extends Error {
     constructor(code, message, data) {
         super('API_ERROR');

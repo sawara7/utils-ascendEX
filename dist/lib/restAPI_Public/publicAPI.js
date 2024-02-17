@@ -24,12 +24,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ASDPublicApiClass = void 0;
-const baseAPI_1 = require("./baseAPI");
-const requestType_1 = require("./requestType");
 const querystring = __importStar(require("querystring"));
+const utils_1 = require("../utils");
+const baseAPI_1 = require("../restAPI_Base/baseAPI");
 class ASDPublicApiClass extends baseAPI_1.BaseApiClass {
     constructor(config) {
-        config.endPoint = config.endPoint || requestType_1.ASCENDEX_ENDPOINT;
+        config.endPoint = config.endPoint || utils_1.ASCENDEX_ENDPOINT;
         super(config);
     }
     get(path, query) {

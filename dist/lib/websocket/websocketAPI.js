@@ -122,7 +122,7 @@ class WebsocketAPI {
                             price: parseFloat(res.data.p),
                             status: res.data.st,
                             filledSize: parseFloat(res.data.cfq),
-                            remainingSize: parseFloat(res.data.q) - parseFloat(res.data.cfq),
+                            remainingSize: parseFloat(res.data.q) - parseFloat(res.data.cfq), //0.0,
                             avgFillPrice: parseFloat(res.data.ap)
                         };
                         this.params.onOrder(order);
@@ -141,7 +141,7 @@ class WebsocketAPI {
                         price: parseFloat(res.p),
                         status: res.st,
                         filledSize: parseFloat(res.cfq),
-                        remainingSize: parseFloat(res.q) - parseFloat(res.cfq),
+                        remainingSize: parseFloat(res.q) - parseFloat(res.cfq), //0.0,
                         avgFillPrice: parseFloat(res.ap)
                     };
                     this.params.onOrder(order);

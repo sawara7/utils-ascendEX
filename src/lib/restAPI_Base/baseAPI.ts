@@ -1,7 +1,4 @@
 import axios, { AxiosError, Method } from 'axios'
-import { RESTTradeAPI } from 'my-utils'
-
-export const ASD_API_NAME = 'asd'
 
 export interface ApiConfig {
     endPoint?: string;
@@ -11,7 +8,7 @@ export interface ApiConfig {
     responseCallback?: Function;
 }
 
-export class FTXApiError extends Error {
+export class AscendEXApiError extends Error {
     code: number = 0;
     message: string = '';
     data: any;
@@ -22,7 +19,7 @@ export class FTXApiError extends Error {
         this.data = data;
     }
 }
-export class BaseApiClass extends RESTTradeAPI {
+export class BaseApiClass {
     readonly endPoint: string;
     readonly keepAlive: boolean;
     readonly timeout: number;
@@ -30,7 +27,6 @@ export class BaseApiClass extends RESTTradeAPI {
     readonly responseCallback?: Function;
 
     constructor(config: ApiConfig) {
-        super()
         this.endPoint = config.endPoint || ""
         this.keepAlive = config.keepAlive || false
         this.timeout = config.timeout || 3000
@@ -92,7 +88,7 @@ export class BaseApiClass extends RESTTradeAPI {
                 code = err.response.status;
                 data = err.response.data;
             }
-            throw new FTXApiError(code, message, data);
+            throw new AscendEXApiError(code, message, data);
         }
     }
 }

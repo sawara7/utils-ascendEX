@@ -1,7 +1,5 @@
 import { V1OrderSide, V2FutureOrderSide } from "../utils";
 
-export const ASCENDEX_ENDPOINT = 'https://ascendex.com/'
-
 export interface GetMarginAccountBalanceRequest {
   asset?: string; // valid asset code e.g. "BTC"
   showAll?: boolean; // true / false

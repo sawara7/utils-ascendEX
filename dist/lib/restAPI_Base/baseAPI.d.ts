@@ -1,5 +1,4 @@
 import { Method } from 'axios';
-export declare const ASD_API_NAME = "asd";
 export interface ApiConfig {
     endPoint?: string;
     keepAlive?: boolean;

@@ -4,7 +4,7 @@ export declare class ASDPublicApiClass extends BaseApiClass {
     constructor(config: ApiConfig);
     get<T>(path: string, query?: {}): Promise<any>;
     getAllAssets(): Promise<ASDResponse<Asset[]>>;
-    getTicker(symbol: string): Promise<ASDResponse<Ticker>>;
+    getCashMarginTicker(symbol: string): Promise<ASDResponse<Ticker>>;
     getFutureTicker(symbol: string): Promise<ASDResponse<Ticker>>;
     getFuturePricingData(): Promise<ASDResponse<FuturePricingData>>;
 }

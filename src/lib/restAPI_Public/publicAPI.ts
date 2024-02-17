@@ -1,7 +1,16 @@
-import { BaseApiClass, ApiConfig } from './baseAPI';
-import { ASCENDEX_ENDPOINT } from './requestType';
-import { ASDResponse, Asset, FuturePricingData, Ticker } from './responseType';
 import * as querystring from 'querystring'
+import { ASCENDEX_ENDPOINT } from '../utils'
+import { ASDResponse } from '../restAPI_Base'
+import {
+    BaseApiClass,
+    ApiConfig
+} from '../restAPI_Base/baseAPI';
+
+import {
+    ASDAsset,
+    FuturePricingData,
+    ASDTicker
+} from './responseType';
 
 export class ASDPublicApiClass extends BaseApiClass {
     constructor(config: ApiConfig) {
@@ -17,17 +26,17 @@ export class ASDPublicApiClass extends BaseApiClass {
         return super.get(queryPath, query)
     }
 
-    public getAllAssets(): Promise<ASDResponse<Asset[]>> {
+    public getAllAssets(): Promise<ASDResponse<ASDAsset[]>> {
         const path = 'api/pro/v2/assets'
         return this.get(path)
     }
 
-    public getTicker(symbol: string): Promise<ASDResponse<Ticker>> {
+    public getCashMarginTicker(symbol: string): Promise<ASDResponse<ASDTicker>> {
         const path = 'api/pro/v1/spot/ticker'
         return this.get(path, {symbol: symbol})
     }
 
-    public getFutureTicker(symbol: string): Promise<ASDResponse<Ticker>> {
+    public getFutureTicker(symbol: string): Promise<ASDResponse<ASDTicker>> {
         const path = 'api/pro/v2/futures/ticker'
         return this.get(path, {symbol: symbol})
     }

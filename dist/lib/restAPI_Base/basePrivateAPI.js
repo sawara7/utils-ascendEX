@@ -35,9 +35,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ASDPrivateApiClass = void 0;
 const crypto = __importStar(require("crypto"));
 const baseAPI_1 = require("./baseAPI");
-const requestType_1 = require("./requestType");
 const querystring = __importStar(require("querystring"));
 const utils_general_1 = require("utils-general");
+const utils_1 = require("../utils");
 class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
     static toSha256(key, value) {
         return crypto
@@ -47,7 +47,7 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
             .toString();
     }
     constructor(config) {
-        config.endPoint = config.endPoint || requestType_1.ASCENDEX_ENDPOINT;
+        config.endPoint = config.endPoint || utils_1.ASCENDEX_ENDPOINT;
         super(config);
         this._apiKey = config.apiKey;
         this._apiSecret = config.apiSecret;
@@ -57,86 +57,6 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
         if (!ASDPrivateApiClass._lastOrderTime) {
             ASDPrivateApiClass._lastOrderTime = {};
         }
-    }
-    //
-    // Future
-    //
-    getFuturesAccountBalanceSnapshot(date) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/data/v1/futures/balance/snapshot';
-            return yield this.get(path, 'data/v1/futures/balance/snapshot', { date: date });
-        });
-    }
-    getFutureOrderInfo(orderId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v2/futures/order/status';
-            return yield this.get(path, 'v2/futures/order/status', { orderId: orderId });
-        });
-    }
-    getFuturePosition() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v2/futures/position';
-            return yield this.get(path, 'v2/futures/position', {});
-        });
-    }
-    placeFutureOrder(req) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v2/futures/order';
-            return yield this.post(path, 'v2/futures/order', req, req.time);
-        });
-    }
-    cancelFutureOrder(req) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v2/futures/order';
-            return yield this.delete(path, 'v2/futures/order', req, req.time);
-        });
-    }
-    cancelFutureOrderBatch(req) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (req.length === 0)
-                throw new Error('no Requests.');
-            const path = this._accountGroup + '/api/pro/v2/futures/order/batch';
-            return yield this.delete(path, 'v2/futures/order/batch', { orders: req }, req[0].time);
-        });
-    }
-    cancelFutureOrderAll(symbol) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v2/futures/order/all';
-            return yield this.delete(path, 'v2/futures/order/all', { symbol: symbol }, Date.now());
-        });
-    }
-    //
-    // Margin/Cash
-    //
-    placeCashMarginOrder(type, req) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v1/' + type + '/order';
-            return yield this.post(path, 'order', req);
-        });
-    }
-    cancelCashMarginOrder(type, req) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v1/' + type + '/order';
-            return yield this.delete(path, 'order', req);
-        });
-    }
-    getCashMarginAccountBalance(type, params) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v1/' + type + '/balance';
-            return yield this.get(path, 'balance', params);
-        });
-    }
-    getCashMarginRiskProfile(type) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v1/' + type + '/risk';
-            return yield this.get(path, 'margin/risk', {});
-        });
-    }
-    getCashMarginOrderInfo(type, orderID) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const path = this._accountGroup + '/api/pro/v1/' + type + '/order/status?orderId=' + orderID;
-            return yield this.get(path, 'order/status', {});
-        });
     }
     get(path, apiPath, query) {
         let queryPath = path;
@@ -154,6 +74,9 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
             queryPath += '?' + querystring.encode(query);
         }
         return super.delete(queryPath, query, this.makeHeader(apiPath, ts));
+    }
+    get accountGroup() {
+        return this._accountGroup;
     }
     makeHeader(path, timestamp) {
         const ts = timestamp ? timestamp : Date.now();

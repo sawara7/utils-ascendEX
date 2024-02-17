@@ -14,16 +14,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Websocket
-__exportStar(require("./lib/websocket/wsRequestTypeCommon"), exports);
-__exportStar(require("./lib/websocket/wsResponseTypeCommon"), exports);
-__exportStar(require("./lib/websocket/wsRequestTypeV1"), exports);
-__exportStar(require("./lib/websocket/wsResponseTypeV1"), exports);
-__exportStar(require("./lib/websocket/wsRequestTypeV2"), exports);
-__exportStar(require("./lib/websocket/wsResponseTypeV2"), exports);
-__exportStar(require("./lib/websocket/websocketAPI"), exports);
 // REST API
-__exportStar(require("./lib/restAPI_MarginCash"), exports);
-__exportStar(require("./lib/restAPI_Future"), exports);
-__exportStar(require("./lib/restAPI_Public"), exports);
-__exportStar(require("./lib/utils"), exports);
+__exportStar(require("./baseAPI"), exports);
+__exportStar(require("./privateAPI"), exports);
+__exportStar(require("./publicAPI"), exports);
+__exportStar(require("./requestType"), exports);
+__exportStar(require("./responseType"), exports);
+__exportStar(require("./type"), exports);
