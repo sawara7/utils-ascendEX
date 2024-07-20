@@ -35,7 +35,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ASDPrivateApiClass = void 0;
 const crypto = __importStar(require("crypto"));
 const baseAPI_1 = require("./baseAPI");
-const querystring = __importStar(require("querystring"));
 const utils_general_1 = require("utils-general");
 const utils_1 = require("../utils");
 class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
@@ -61,7 +60,7 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
     get(path, apiPath, query) {
         let queryPath = path;
         if (query && Object.keys(query).length > 0) {
-            queryPath += '?' + querystring.encode(query);
+            queryPath += '?' + (new URLSearchParams(query)).toString();
         }
         return super.get(queryPath, query, this.makeHeader(apiPath));
     }
@@ -71,7 +70,7 @@ class ASDPrivateApiClass extends baseAPI_1.BaseApiClass {
     delete(path, apiPath, query, ts) {
         let queryPath = path;
         if (query && Object.keys(query).length > 0) {
-            queryPath += '?' + querystring.encode(query);
+            queryPath += '?' + (new URLSearchParams(query)).toString();
         }
         return super.delete(queryPath, query, this.makeHeader(apiPath, ts));
     }

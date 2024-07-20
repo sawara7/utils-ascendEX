@@ -1,6 +1,5 @@
 import * as crypto from 'crypto'
 import { ApiConfig, BaseApiClass } from './baseAPI'
-import * as querystring from 'querystring'
 import { sleep } from 'utils-general'
 import { ASCENDEX_ENDPOINT } from '../utils';
 
@@ -45,7 +44,7 @@ export class ASDPrivateApiClass extends BaseApiClass {
     get<T>(path: string, apiPath: string, query?: {}) {
         let queryPath = path
         if (query && Object.keys(query).length > 0) {
-            queryPath += '?' + querystring.encode(query)
+            queryPath += '?' + (new URLSearchParams(query)).toString()
         }
         return super.get(queryPath, query, this.makeHeader(apiPath))
     }
@@ -57,7 +56,7 @@ export class ASDPrivateApiClass extends BaseApiClass {
     delete<T>(path: string, apiPath: string, query?: {}, ts?: number) {
         let queryPath = path
         if (query && Object.keys(query).length > 0) {
-            queryPath += '?' + querystring.encode(query)
+            queryPath += '?' + (new URLSearchParams(query)).toString()
         }
         return super.delete(queryPath, query, this.makeHeader(apiPath, ts))
     }
